@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#10152b">
+  <meta name="description" content="SkillBridge helps students discover opportunities, learn practical skills, and build projects.">
+  <title>SkillBridge — Your Skills, Your Future</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a href="#home" class="brand">
+    <span class="brand-icon">S</span>
+    <span>Skill<span class="highlight">Bridge</span></span>
+  </a>
+
+  <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">☰</button>
+
+  <nav class="navigation" id="navigation">
+    <a href="#home">Home</a>
+    <a href="#discover">Discover</a>
+    <a href="#academy">Skill Academy</a>
+    <a href="#projects">Project Lab</a>
+    <a href="#careers">Careers</a>
+  </nav>
+
+  <a href="#explore" class="top-button">Get Started ↗</a>
+</header>
+
+<main>
+  <section class="hero section" id="home">
+    <div class="hero-content">
+      <span class="eyebrow">✦ YOUR FUTURE STARTS HERE</span>
+      <h1>Discover your potential.<br><span>Build your future.</span></h1>
+      <p>Discover opportunities, develop practical skills, build real projects, and explore the future you want to create.</p>
+
+      <div class="hero-buttons">
+        <a href="#discover" class="button primary">Explore Opportunities ↗</a>
+        <a href="#academy" class="button secondary">Start Learning</a>
+      </div>
+
+      <p class="hero-note">✦ Built for curious minds and ambitious students.</p>
+    </div>
+
+    <div class="visual">
+      <div class="visual-card">
+        <span class="card-label">YOUR JOURNEY</span>
+        <div class="rocket">🚀</div>
+        <h3>Turn curiosity into capability.</h3>
+        <p>Learn something new. Build something meaningful.</p>
+
+        <div class="journey">
+          <div><span>01</span><p><strong>Discover</strong><small>Find opportunities</small></p>✓</div>
+          <div><span>02</span><p><strong>Learn</strong><small>Develop useful skills</small></p>✓</div>
+          <div><span>03</span><p><strong>Build</strong><small>Turn ideas into projects</small></p>↗</div>
+        </div>
+      </div>
+      <div class="floating float-one">💡 Ideas into action</div>
+      <div class="floating float-two">🎯 Find your direction</div>
+    </div>
+  </section>
+
+  <section class="stats section">
+    <div>🎓 <strong>Learn</strong><small>Develop new skills</small></div>
+    <div>🌍 <strong>Discover</strong><small>Find opportunities</small></div>
+    <div>🛠️ <strong>Create</strong><small>Build projects</small></div>
+    <div>🧭 <strong>Grow</strong><small>Explore your future</small></div>
+  </section>
+
+  <section class="section content" id="discover">
+    <span class="eyebrow">OPPORTUNITIES AWAIT</span>
+    <h2>Discover what's possible.</h2>
+    <p class="section-description">Explore opportunities that could open new doors for you.</p>
+
+    <div class="grid">
+      <article class="card">
+        <div class="icon purple">🏆</div>
+        <span class="tag">COMPETITIONS</span>
+        <h3>Challenge your ideas.</h3>
+        <p>Discover innovation challenges, contests, and opportunities to showcase your ideas.</p>
+        <a href="#explore">Explore competitions ↗</a>
+      </article>
+
+      <article class="card">
+        <div class="icon blue">🎓</div>
+        <span class="tag">SCHOLARSHIPS</span>
+        <h3>Invest in your future.</h3>
+        <p>Find scholarship programmes and educational funding opportunities.</p>
+        <a href="#explore">Find scholarships ↗</a>
+      </article>
+
+      <article class="card">
+        <div class="icon orange">🌱</div>
+        <span class="tag">PROGRAMMES</span>
+        <h3>Grow beyond the classroom.</h3>
+        <p>Explore youth programmes, mentorship, and ways to gain experience.</p>
+        <a href="#explore">Explore programmes ↗</a>
+      </article>
+    </div>
+
+    <p class="notice">ⓘ Opportunity listings will be verified as the platform develops.</p>
+  </section>
+
+  <section class="academy" id="academy">
+    <div class="section">
+      <span class="eyebrow">INVEST IN YOURSELF</span>
+      <h2>Skills that move you forward.</h2>
+      <p class="section-description">Choose an area to explore a practical starting point.</p>
+
+      <div class="skills">
+        <button class="skill" data-skill="Web Development">💻 <span><strong>Web Development</strong><small>Build websites and digital experiences.</small></span>↗</button>
+        <button class="skill" data-skill="Artificial Intelligence">🤖 <span><strong>Artificial Intelligence</strong><small>Explore AI tools and innovation.</small></span>↗</button>
+        <button class="skill" data-skill="Graphic Design">🎨 <span><strong>Graphic Design</strong><small>Communicate through visual design.</small></span>↗</button>
+        <button class="skill" data-skill="Entrepreneurship">💼 <span><strong>Entrepreneurship</strong><small>Develop and test useful ideas.</small></span>↗</button>
+      </div>
+
+      <div class="skill-details" id="skillDetails" hidden>
+        <h3 id="skillTitle"></h3>
+        <p id="skillText"></p>
+        <button id="closeSkill" class="close-button">Close</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="project section" id="projects">
+    <div>
+      <span class="eyebrow">LEARN BY DOING</span>
+      <h2>Your ideas deserve to become real.</h2>
+      <p>Practise what you learn through small projects. Develop confidence, experience, and problem-solving skills.</p>
+      <a href="#projectIdeas" class="button light">Explore Project Ideas ↗</a>
+    </div>
+
+    <div class="code-box">
+      <div class="window"><i></i><i></i><i></i><span>project-lab</span></div>
+      <pre><span>const</span> idea = <b>"your vision"</b>;
+
+<span>const</span> skills = learn();
+
+<span>const</span> project = build(idea);
+
+<span class="comment">// Great things start small.</span>
+createSomething();</pre>
+    </div>
+  </section>
+
+  <section class="section content" id="projectIdeas">
+    <span class="eyebrow">START SMALL, BUILD BIG</span>
+    <h2>Try a practical project.</h2>
+    <p class="section-description">Starter ideas to help you practise your skills.</p>
+
+    <div class="grid">
+      <article class="card project-card"><span class="number">01</span><h3>Personal portfolio</h3><p>Create a website to introduce yourself and display your projects.</p><span class="tag">BEGINNER · WEB</span></article>
+      <article class="card project-card"><span class="number">02</span><h3>Study planner</h3><p>Design a weekly planner to organise school tasks and goals.</p><span class="tag">BEGINNER · DESIGN</span></article>
+      <article class="card project-card"><span class="number">03</span><h3>Opportunity board</h3><p>Build a page that organises competitions and scholarships.</p><span class="tag">BEGINNER · WEB</span></article>
+    </div>
+  </section>
+
+  <section class="section career" id="careers">
+    <div>
+      <span class="eyebrow">THINK ABOUT TOMORROW</span>
+      <h2>Curious about your future?</h2>
+      <p>Explore careers and discover the skills and projects that can help you prepare.</p>
+    </div>
+    <a href="#explore" class="button primary">Explore Careers ↗</a>
+  </section>
+
+  <section class="final-cta section" id="explore">
+    <span class="eyebrow">YOUR NEXT CHAPTER STARTS HERE</span>
+    <h2>You don't have to know everything.<br><span>You just have to start.</span></h2>
+    <p>Discover something new. Learn a skill. Build your future.</p>
+    <a href="#academy" class="button light">Start Exploring ↗</a>
+  </section>
+</main>
+
+<footer class="footer section">
+  <a href="#home" class="brand"><span class="brand-icon">S</span> Skill<span class="highlight">Bridge</span></a>
+  <p>Helping students discover, learn, build, and grow.</p>
+  <small>© <span id="year"></span> SkillBridge. Built for the future.</small>
+</footer>
+
+<script src="assets/js/app.js"></script>
+</body>
+</html>
