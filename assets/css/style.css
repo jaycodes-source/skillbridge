@@ -895,6 +895,40 @@ button:focus-visible {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+/* ===== FEATURE CARD LINKS ===== */
+
+.feature-link {
+  display: inline-block;
+  margin-top: 18px;
+  color: var(--primary);
+  font-size: 14px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.feature-link:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
+}
+
+/* Keep all homepage sections within the screen */
+
+main,
+section,
+article {
+  min-width: 0;
+}
+
+.hero,
+.intro-section,
+.final-cta {
+  max-width: 100%;
+}
+
+@media (max-width: 600px) {
+  .feature-link {
+    margin-top: 14px;
+  }
 }
 
 /* ===== END OF SKILLBRIDGE STYLESHEET ===== */
