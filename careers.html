@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Career Hub | SkillBridge</title>
+  <meta name="description" content="Explore career paths, discover valuable skills, and find learning opportunities with SkillBridge.">
+
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/js/app.js" defer></script>
+
+  <style>
+    .career-page {
+      padding: 36px 0 64px;
+      overflow-x: clip;
+    }
+
+    .career-page * {
+      box-sizing: border-box;
+      min-width: 0;
+    }
+
+    .career-hero {
+      padding: 40px 26px;
+      border-radius: 24px;
+      color: #fff;
+      background: linear-gradient(135deg, #101a38, #343e91, #6255d9);
+      margin-bottom: 38px;
+    }
+
+    .career-eyebrow {
+      color: #d6d9ff;
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .career-hero h1 {
+      max-width: 760px;
+      font-size: clamp(2rem, 5vw, 3.3rem);
+      line-height: 1.12;
+      margin: 14px 0;
+      overflow-wrap: anywhere;
+    }
+
+    .career-hero p {
+      max-width: 650px;
+      color: #e5e8ff;
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+
+    .career-hero a {
+      display: inline-block;
+      padding: 13px 19px;
+      border-radius: 10px;
+      background: #fff;
+      color: #222d68;
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    .career-section {
+      margin-top: 42px;
+    }
+
+    .career-section-heading {
+      margin-bottom: 22px;
+    }
+
+    .career-section-heading h2 {
+      margin: 0 0 9px;
+      font-size: clamp(1.5rem, 4vw, 2rem);
+    }
+
+    .career-section-heading p {
+      color: var(--text-muted, #64748b);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .career-search {
+      width: 100%;
+      padding: 14px 16px;
+      margin: 10px 0 20px;
+      border: 1px solid var(--border, #dce2ed);
+      border-radius: 12px;
+      background: var(--white, #fff);
+      color: var(--text, #172033);
+      font: inherit;
+      outline: none;
+    }
+
+    .career-search:focus {
+      border-color: var(--primary, #4f46e5);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, .12);
+    }
+
+    .career-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .career-card {
+      display: flex;
+      flex-direction: column;
+      padding: 23px;
+      border: 1px solid var(--border, #e2e8f0);
+      border-radius: 18px;
+      background: var(--white, #fff);
+      box-shadow: 0 8px 28px rgba(20, 35, 70, .045);
+      overflow-wrap: anywhere;
+      transition: transform .2s ease;
+    }
+
+    .career-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .career-icon {
+      display: grid;
+      place-items: center;
+      width: 54px;
+      height: 54px;
+      border-radius: 15px;
+      background: #eef0ff;
+      font-size: 1.7rem;
+      margin-bottom: 17px;
+    }
+
+    .career-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.17rem;
+      line-height: 1.4;
+    }
+
+    .career-card p {
+      color: var(--text-muted, #64748b);
+      line-height: 1.7;
+      font-size: .94rem;
+      margin: 0 0 16px;
+    }
+
+    .career-card h4 {
+      margin: 8px 0;
+      font-size: .9rem;
+    }
+
+    .career-skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin: 0 0 20px;
+    }
+
+    .career-skills span {
+      padding: 6px 8px;
+      background: #f3f4fa;
+      border-radius: 7px;
+      color: #4b5568;
+      font-size: .77rem;
+    }
+
+    .career-card a {
+      display: block;
+      margin-top: auto;
+      padding: 12px 14px;
+      border: 1px solid var(--border, #dce2ed);
+      border-radius: 10px;
+      color: var(--primary, #4f46e5);
+      text-decoration: none;
+      text-align: center;
+      font-size: .9rem;
+      font-weight: 800;
+    }
+
+    .career-card a:hover {
+      background: #f1f2ff;
+    }
+
+    .career-card[hidden] {
+      display: none !important;
+    }
+
+    .career-empty {
+      display: none;
+      margin-top: 20px;
+      padding: 25px;
+      text-align: center;
+      border: 1px dashed var(--border, #dce2ed);
+      border-radius: 14px;
+      color: var(--text-muted, #64748b);
+    }
+
+    .career-roadmap {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 15px;
+    }
+
+    .roadmap-step {
+      padding: 20px;
+      background: #f7f8ff;
+      border: 1px solid #e7e9ff;
+      border-radius: 15px;
+    }
+
+    .roadmap-number {
+      display: grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: #e2e5ff;
+      color: #3730a3;
+      font-weight: 900;
+      margin-bottom: 13px;
+    }
+
+    .roadmap-step h3 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+    }
+
+    .roadmap-step p {
+      margin: 0;
+      color: var(--text-muted, #64748b);
+      font-size: .9rem;
+      line-height: 1.7;
+    }
+
+    .career-resources {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 15px;
+    }
+
+    .resource-card {
+      padding: 21px;
+      border: 1px solid var(--border, #e2e8f0);
+      border-radius: 15px;
+      background: var(--white, #fff);
+    }
+
+    .resource-card h3 {
+      margin: 0 0 8px;
+    }
+
+    .resource-card p {
+      color: var(--text-muted, #64748b);
+      line-height: 1.7;
+    }
+
+    .resource-card a {
+      color: var(--primary, #4f46e5);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .career-cta {
+      margin-top: 42px;
+      padding: 30px;
+      border-radius: 20px;
+      background: #f0f2ff;
+      border: 1px solid #e0e5ff;
+    }
+
+    .career-cta h2 {
+      margin: 0 0 10px;
+      font-size: clamp(1.4rem, 4vw, 1.9rem);
+    }
+
+    .career-cta p {
+      max-width: 700px;
+      color: #4b5568;
+      line-height: 1.75;
+    }
+
+    .career-cta a {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 12px 18px;
+      border-radius: 10px;
+      background: var(--primary, #4f46e5);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    @media (max-width: 900px) {
+      .career-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .career-roadmap {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 600px) {
+      .career-page {
+        padding-top: 22px;
+      }
+
+      .career-hero {
+        padding: 28px 19px;
+        border-radius: 18px;
+      }
+
+      .career-grid,
+      .career-roadmap,
+      .career-resources {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .career-card {
+        padding: 20px;
+      }
+
+      .career-cta {
+        padding: 23px 19px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .career-card {
+        transition: none;
+      }
+
+      .career-card:hover {
+        transform: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container nav-container">
+
+      <a href="index.html" class="brand">
+        <span>SkillBridge</span>
+      </a>
+
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        type="button"
+        aria-label="Open navigation"
+        aria-expanded="false"
+        aria-controls="navigation">
+        ☰
+      </button>
+
+      <nav class="navigation" id="navigation">
+        <a href="index.html">Home</a>
+        <a href="discover.html">Discover</a>
+        <a href="academy.html">Academy</a>
+        <a href="projects.html">Project Lab</a>
+        <a href="careers.html">Careers</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="profile.html">Profile</a>
+      </nav>
+
+    </div>
+  </header>
+
+  <main class="career-page">
+    <div class="container">
+
+      <!-- HERO -->
+      <section class="career-hero">
+        <span class="career-eyebrow">Discover Your Future</span>
+
+        <h1>Your skills today can shape your career tomorrow.</h1>
+
+        <p>
+          Explore different career paths, discover the skills they require,
+          and find learning resources to help you take your first steps.
+          You do not need to have your whole future figured out yet.
+        </p>
+
+        <a href="#careerPaths">Explore Career Paths →</a>
+      </section>
+
+      <!-- CAREER PATHS -->
+      <section class="career-section" id="careerPaths">
+
+        <div class="career-section-heading">
+          <h2>Explore Career Paths</h2>
+          <p>
+            Search careers to learn what people in each field do and which
+            skills you can begin developing.
+          </p>
+        </div>
+
+        <input
+          type="search"
+          class="career-search"
+          id="careerSearch"
+          placeholder="Search careers or skills..."
+          aria-label="Search career paths">
+
+        <div class="career-grid" id="careerGrid">
+
+          <article class="career-card">
+            <div class="career-icon">💻</div>
+            <h3>Software Developer</h3>
+            <p>
+              Build websites, applications, and digital tools that solve
+              problems for people and organisations.
+            </p>
+            <h4>Useful skills</h4>
+            <div class="career-skills">
+              <span>Programming</span>
+              <span>Problem-solving</span>
+              <span>Debugging</span>
+            </div>
+            <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development">
+              Explore Web Development →
+            </a>
+          </article>
+
+          <article class="career-card">
+            <div class="career-icon">🎨</div>
+            <h3>Graphic Designer</h3>
+            <p>
+              Communicate ideas through visual designs such as logos,
+              posters, branding, and digital illustrations.
+            </p>
+            <h4>Useful skills</h4>
+            <div class="career-skills">
+              <span>Creativity</span>
+              <span>Typography</span>
+              <span>Visual design</span>
+            </div>
+            <a href="https://www.canva.com/designschool/">
+              Explore Design →
+            </a>
+          </article>
+
+          <article class="career-card">
+            <div class="career-icon">🤖</div>
+            <h3>AI Specialist</h3>
+            <p>
+              Explore artificial intelligence and help develop systems
+              that recognise patterns, generate content, or solve tasks.
+            </p>
+            <h4>Useful skills</h4>
+            <div class="career-skills">
+              <span>AI fundamentals</span>
+              <span>Mathematics</span>
+              <span>Programming</span>
+            </div>
+            <a href="https://www.ibm.com/think/topics/artificial-intelligence">
+              Explore Artificial Intelligence →
+            </a>
+          </article>
+
+          <article class="career-card">
+            <div class="career-icon">📊</div>
+            <h3>Data Analyst</h3>
+            <p>
+              Study information, identify patterns, and help people make
+              better decisions using evidence.
+            </p>
+            <h4>Useful skills</h4>
+            <div class="career-skills">
+              <span>Statistics</span>
+              <span>Spreadsheets</span>
+              <span>Data visualisation</span>
+            </div>
+            <a href="https://www.khanacademy.org/math/statistics-probability">
+              Explore Statistics →
+            </a>
+          </article>
+
+          <article class="career-card">
+            <div class="career-icon">🔐</div>
+            <h3>Cybersecurity Professional</h3>
+            <p>
+              Help protect computers, networks, and information from
+              digital threats and unauthorised access.
+            </p>
+            <h4>Useful skills</h4>
+            <div class="career-skills">
+              <span>Networking</span>
+              <span>Security basics</span>
+              <span>Critical thinking</span>
+            </div>
+            <a href="https://skillsforall.com/">
+              Explore Cybersecurity Learning →
+            </a>
+          </article>
+
+          <article class="career-card">
+            <div class="career-icon">📱</div>
+            <h3>Digital Content Creator</h3>
+            <p>
+              Create educational or entertaining content for websites,
+              social media, videos, and online communities.
+            </p>
+            <h4>Useful skills</h4>
+            <div class="career-skills">
+              <span>Storytelling</span>
+              <span>Video editing</span>
+              <span>Communication</span>
+            </div>
+            <a href="https://creatoracademy.youtube.com/">
+              Explore Creator Resources →
+            </a>
+          </article>
+
+          <article class="career-card">
+            <div class="career-icon">📈</div>
+            <h3>Entrepreneur</h3>
+            <p>
+              Identify problems, develop useful products or services,
+              and build a business around a promising idea.
+            </p>
+            <h4>Useful skills</h4>
+            <div class="career-skills">
+              <span>Planning</span>
+              <span>Communication</span>
+              <span>Financial literacy</span>
+            </div>
+            <a href="https://www.sba.gov/business-guide">
+              Explore Business Skills →
+            </a>
+          </article>
+
+          <article class="career-card">
+            <div class="career-icon">🧪</div>
+            <h3>Science & Research</h3>
+            <p>
+              Investigate questions about the world, test ideas,
+              analyse evidence, and share discoveries.
+            </p>
+            <h4>Useful skills</h4>
+            <div class="career-skills">
+              <span>Observation</span>
+              <span>Research</span>
+              <span>Scientific reasoning</span>
+            </div>
+            <a href="https://www.khanacademy.org/science">
+              Explore Science →
+            </a>
+          </article>
+
+          <article class="career-card">
+            <div class="career-icon">🌐</div>
+            <h3>UI/UX Designer</h3>
+            <p>
+              Design digital experiences that are clear, accessible,
+              attractive, and easy for people to use.
+            </p>
+            <h4>Useful skills</h4>
+            <div class="career-skills">
+              <span>Design thinking</span>
+              <span>Prototyping</span>
+              <span>User research</span>
+            </div>
+            <a href="https://www.figma.com/resource-library/">
+              Explore Design Resources →
+            </a>
+          </article>
+
+        </div>
+
+        <p class="career-empty" id="careerEmpty">
+          No matching careers found. Try another search.
+        </p>
+
+      </section>
+
+      <!-- ROADMAP -->
+      <section class="career-section">
+        <div class="career-section-heading">
+          <h2>Your Career Roadmap</h2>
+          <p>
+            You can begin exploring a career while you are still in school.
+            Take it one step at a time.
+          </p>
+        </div>
+
+        <div class="career-roadmap">
+
+          <article class="roadmap-step">
+            <div class="roadmap-number">01</div>
+            <h3>Discover</h3>
+            <p>
+              Explore different fields and identify what interests you.
+            </p>
+          </article>
+
+          <article class="roadmap-step">
+            <div class="roadmap-number">02</div>
+            <h3>Learn</h3>
+            <p>
+              Study the basic knowledge and skills used in your chosen field.
+            </p>
+          </article>
+
+          <article class="roadmap-step">
+            <div class="roadmap-number">03</div>
+            <h3>Practise</h3>
+            <p>
+              Complete small projects to apply what you have learned.
+            </p>
+          </article>
+
+          <article class="roadmap-step">
+            <div class="roadmap-number">04</div>
+            <h3>Show Your Work</h3>
+            <p>
+              Organise your projects into a portfolio and keep improving.
+            </p>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- LEARNING RESOURCES -->
+      <section class="career-section">
+        <div class="career-section-heading">
+          <h2>Learning Resources</h2>
+          <p>
+            These external websites offer resources that can help you
+            explore subjects and develop useful skills.
+          </p>
+        </div>
+
+        <div class="career-resources">
+
+          <article class="resource-card">
+            <h3>🎓 Khan Academy</h3>
+            <p>
+              Study mathematics, science, computing, and other subjects
+              with free educational lessons.
+            </p>
+            <a href="https://www.khanacademy.org/">
+              Visit Khan Academy →
+            </a>
+          </article>
+
+          <article class="resource-card">
+            <h3>💡 freeCodeCamp</h3>
+            <p>
+              Practise programming and learn web development through
+              structured lessons and coding challenges.
+            </p>
+            <a href="https://www.freecodecamp.org/">
+              Visit freeCodeCamp →
+            </a>
+          </article>
+
+          <article class="resource-card">
+            <h3>🌍 Microsoft Learn</h3>
+            <p>
+              Explore technical learning paths in areas such as
+              cloud computing, software, and AI.
+            </p>
+            <a href="https://learn.microsoft.com/training/">
+              Visit Microsoft Learn →
+            </a>
+          </article>
+
+          <article class="resource-card">
+            <h3>🎨 Canva Design School</h3>
+            <p>
+              Explore design principles and learn how to communicate
+              ideas through visual content.
+            </p>
+            <a href="https://www.canva.com/designschool/">
+              Visit Design School →
+            </a>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="career-cta">
+        <h2>Ready to build your skills?</h2>
+        <p>
+          Choose a learning path, practise what you learn, and create
+          projects that demonstrate your progress. Your journey can start
+          with one small step.
+        </p>
+        <a href="academy.html">Explore the Academy →</a>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>
+        © <span data-current-year></span> SkillBridge.
+        Learn skills. Build confidence. Create opportunities.
+      </p>
+    </div>
+  </footer>
+
+  <!-- CAREER SEARCH -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const searchInput = document.getElementById("careerSearch");
+      const cards = document.querySelectorAll(".career-card");
+      const emptyMessage = document.getElementById("careerEmpty");
+
+      function searchCareers() {
+        const query = searchInput.value.trim().toLowerCase();
+        let visibleCount = 0;
+
+        cards.forEach(function (card) {
+          const matches = card.textContent.toLowerCase().includes(query);
+
+          card.hidden = !matches;
+
+          if (matches) {
+            visibleCount++;
+          }
+        });
+
+        emptyMessage.style.display =
+          visibleCount === 0 ? "block" : "none";
+      }
+
+      searchInput.addEventListener("input", searchCareers);
+      searchCareers();
+    });
+  </script>
+
+</body>
+</html>
