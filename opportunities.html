@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Opportunities Hub | SkillBridge</title>
+  <meta name="description" content="Discover scholarships, competitions, grants and internships on SkillBridge.">
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <style>
+    .opportunities-page {
+      --opp-primary: #6558e8;
+      --opp-dark: #15162b;
+      --opp-muted: #74778a;
+      --opp-border: #e8e9f2;
+      color: var(--opp-dark);
+      padding-bottom: 60px;
+    }
+
+    .opp-hero {
+      padding: 60px 20px;
+      background: linear-gradient(135deg, #171831, #34306e);
+      color: white;
+      text-align: center;
+    }
+
+    .opp-label {
+      display: inline-block;
+      padding: 8px 13px;
+      border: 1px solid #7770c9;
+      border-radius: 30px;
+      color: #e0ddff;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .opp-hero h1 {
+      max-width: 780px;
+      margin: 22px auto 14px;
+      font-size: clamp(32px, 6vw, 54px);
+      line-height: 1.15;
+    }
+
+    .opp-hero h1 span {
+      color: #aaa3ff;
+    }
+
+    .opp-hero p {
+      max-width: 650px;
+      margin: 0 auto;
+      color: #d4d5e9;
+      line-height: 1.8;
+    }
+
+    .opp-search-wrap {
+      max-width: 680px;
+      margin: 28px auto 0;
+      display: flex;
+      gap: 10px;
+    }
+
+    .opp-search-wrap input {
+      width: 100%;
+      min-width: 0;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      background: white;
+      color: #171831;
+      font: inherit;
+    }
+
+    .opp-search-wrap button {
+      padding: 0 22px;
+      border: 0;
+      border-radius: 12px;
+      background: #8175ff;
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .opp-container {
+      width: min(1100px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    .opp-notice {
+      margin: 25px 0;
+      padding: 15px 18px;
+      border: 1px solid #f2d69c;
+      border-radius: 12px;
+      background: #fff9e9;
+      color: #76520b;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .opp-section {
+      margin-top: 40px;
+    }
+
+    .opp-section-heading {
+      margin-bottom: 20px;
+    }
+
+    .opp-section-heading h2 {
+      margin: 0 0 8px;
+      font-size: clamp(23px, 4vw, 30px);
+    }
+
+    .opp-section-heading p {
+      margin: 0;
+      color: var(--opp-muted);
+      line-height: 1.7;
+    }
+
+    .opp-categories {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 25px 0;
+    }
+
+    .opp-filter {
+      padding: 11px 16px;
+      border: 1px solid var(--opp-border);
+      border-radius: 30px;
+      background: white;
+      color: #45465b;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .opp-filter.active,
+    .opp-filter:hover {
+      border-color: var(--opp-primary);
+      background: var(--opp-primary);
+      color: white;
+    }
+
+    .opp-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .opp-card {
+      min-width: 0;
+      padding: 21px;
+      border: 1px solid var(--opp-border);
+      border-radius: 17px;
+      background: white;
+      box-shadow: 0 5px 20px #191a2b08;
+      display: flex;
+      flex-direction: column;
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .opp-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px #191a2b10;
+    }
+
+    .opp-card[hidden] {
+      display: none !important;
+    }
+
+    .opp-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .opp-icon {
+      width: 45px;
+      height: 45px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      border-radius: 13px;
+      background: #efedff;
+      font-size: 23px;
+    }
+
+    .opp-badge {
+      padding: 7px 9px;
+      border-radius: 20px;
+      background: #f0efff;
+      color: #5748d4;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .opp-card h3 {
+      margin: 0 0 10px;
+      font-size: 19px;
+      line-height: 1.4;
+      overflow-wrap: anywhere;
+    }
+
+    .opp-provider {
+      margin: 0 0 13px;
+      color: var(--opp-muted);
+      font-size: 12px;
+    }
+
+    .opp-description {
+      margin: 0 0 18px;
+      color: #55576b;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .opp-details {
+      display: grid;
+      gap: 11px;
+      margin-bottom: 20px;
+      padding-top: 15px;
+      border-top: 1px solid #f0f0f5;
+    }
+
+    .opp-detail {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      font-size: 12px;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+    }
+
+    .opp-detail strong {
+      display: block;
+      margin-bottom: 2px;
+      color: #34354a;
+    }
+
+    .opp-detail span {
+      color: var(--opp-muted);
+    }
+
+    .opp-card-actions {
+      display: flex;
+      gap: 9px;
+      margin-top: auto;
+    }
+
+    .opp-button {
+      flex: 1;
+      min-width: 0;
+      padding: 12px 10px;
+      border: 1px solid var(--opp-primary);
+      border-radius: 10px;
+      background: var(--opp-primary);
+      color: white;
+      text-align: center;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .opp-button.secondary {
+      background: white;
+      color: var(--opp-primary);
+    }
+
+    .opp-empty {
+      display: none;
+      padding: 40px 15px;
+      border: 1px dashed #d7d7e8;
+      border-radius: 15px;
+      text-align: center;
+      color: var(--opp-muted);
+      line-height: 1.7;
+    }
+
+    .opp-deadline-panel {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 25px;
+    }
+
+    .opp-stat {
+      padding: 20px;
+      border: 1px solid var(--opp-border);
+      border-radius: 15px;
+      background: #fafaff;
+    }
+
+    .opp-stat strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--opp-primary);
+      font-size: 22px;
+    }
+
+    .opp-stat span {
+      color: var(--opp-muted);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .opp-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      background: #111225b8;
+    }
+
+    .opp-modal.open {
+      display: flex;
+    }
+
+    .opp-modal-box {
+      width: min(620px, 100%);
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 25px;
+      border-radius: 18px;
+      background: white;
+      color: var(--opp-dark);
+    }
+
+    .opp-modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 15px;
+    }
+
+    .opp-modal-header h2 {
+      margin: 0 0 15px;
+      line-height: 1.4;
+    }
+
+    .opp-close {
+      width: 38px;
+      height: 38px;
+      flex-shrink: 0;
+      border: 0;
+      border-radius: 10px;
+      background: #f0eff9;
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    .opp-modal-content {
+      color: #55576b;
+      font-size: 14px;
+      line-height: 1.9;
+      overflow-wrap: anywhere;
+    }
+
+    .opp-modal-content h3 {
+      margin-bottom: 5px;
+      color: var(--opp-dark);
+    }
+
+    .opp-modal-content ul {
+      padding-left: 22px;
+    }
+
+    @media (max-width: 900px) {
+      .opp-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 560px) {
+      .opp-hero {
+        padding: 45px 16px;
+      }
+
+      .opp-search-wrap {
+        flex-direction: column;
+      }
+
+      .opp-search-wrap button {
+        padding: 14px;
+      }
+
+      .opp-grid,
+      .opp-deadline-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .opp-card {
+        padding: 18px;
+      }
+
+      .opp-categories {
+        gap: 8px;
+      }
+
+      .opp-filter {
+        padding: 9px 12px;
+        font-size: 12px;
+      }
+
+      .opp-modal-box {
+        padding: 19px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="brand"><span>SkillBridge</span></a>
+
+      <button class="menu-toggle" id="menuToggle" type="button"
+        aria-label="Open navigation" aria-expanded="false"
+        aria-controls="navigation">☰</button>
+
+      <nav class="navigation" id="navigation">
+        <a href="index.html">Home</a>
+        <a href="discover.html">Discover</a>
+        <a href="academy.html">Academy</a>
+        <a href="projects.html">Project Lab</a>
+        <a href="careers.html">Careers</a>
+        <a href="opportunities.html" aria-current="page">Opportunities</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="profile.html">Profile</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="opportunities-page">
+    <section class="opp-hero">
+      <span class="opp-label">YOUR NEXT OPPORTUNITY STARTS HERE</span>
+      <h1>Find opportunities.<br><span>Build your future.</span></h1>
+      <p>
+        Explore scholarships, competitions, grants, internships and
+        programmes designed to help students learn, grow and achieve more.
+      </p>
+
+      <form class="opp-search-wrap" id="oppSearchForm" role="search">
+        <input id="oppSearch" type="search"
+          placeholder="Search scholarships, competitions..."
+          aria-label="Search opportunities">
+        <button type="submit">Search</button>
+      </form>
+    </section>
+
+    <div class="opp-container">
+      <div class="opp-notice">
+        <strong>Important:</strong> These are demonstration listings,
+        not verified active opportunities. Dates, eligibility and awards
+        are placeholders. Do not submit personal information or pay fees
+        based on these examples.
+      </div>
+
+      <section class="opp-section">
+        <div class="opp-section-heading">
+          <h2>Explore opportunities</h2>
+          <p>Find opportunities that match your goals and eligibility.</p>
+        </div>
+
+        <div class="opp-categories" aria-label="Filter opportunities">
+          <button class="opp-filter active" data-category="all">All</button>
+          <button class="opp-filter" data-category="scholarship">Scholarships</button>
+          <button class="opp-filter" data-category="competition">Competitions</button>
+          <button class="opp-filter" data-category="grant">Grants</button>
+          <button class="opp-filter" data-category="internship">Internships</button>
+          <button class="opp-filter" data-category="bootcamp">Bootcamps</button>
+        </div>
+
+        <div class="opp-grid" id="oppGrid">
+
+          <article class="opp-card"
+            data-category="scholarship"
+            data-search="student excellence scholarship undergraduate secondary nigeria education">
+            <div class="opp-card-top">
+              <div class="opp-icon">🎓</div>
+              <span class="opp-badge">SCHOLARSHIP</span>
+            </div>
+            <h3>Student Excellence Scholarship</h3>
+            <p class="opp-provider">Example listing · Not verified</p>
+            <p class="opp-description">
+              A demonstration scholarship supporting students who want
+              to continue their education.
+            </p>
+            <div class="opp-details">
+              <div class="opp-detail">💰 <div><strong>Award</strong><span>Not yet verified</span></div></div>
+              <div class="opp-detail">👥 <div><strong>Eligibility</strong><span>Requirements to be confirmed</span></div></div>
+              <div class="opp-detail">📅 <div><strong>Deadline</strong><span>To be confirmed</span></div></div>
+            </div>
+            <div class="opp-card-actions">
+              <button class="opp-button secondary" data-details="excellence">View details</button>
+            </div>
+          </article>
+
+          <article class="opp-card"
+            data-category="competition"
+            data-search="student coding programming technology software competition">
+            <div class="opp-card-top">
+              <div class="opp-icon">💻</div>
+              <span class="opp-badge">COMPETITION</span>
+            </div>
+            <h3>Student Coding Challenge</h3>
+            <p class="opp-provider">Example listing · Not verified</p>
+            <p class="opp-description">
+              A demonstration competition for students interested in
+              programming, technology and problem-solving.
+            </p>
+            <div class="opp-details">
+              <div class="opp-detail">🏆 <div><strong>Prize</strong><span>Not yet verified</span></div></div>
+              <div class="opp-detail">👥 <div><strong>Eligibility</strong><span>Age and country requirements to be confirmed</span></div></div>
+              <div class="opp-detail">📅 <div><strong>Deadline</strong><span>To be confirmed</span></div></div>
+            </div>
+            <div class="opp-card-actions">
+              <button class="opp-button secondary" data-details="coding">View details</button>
+            </div>
+          </article>
+
+          <article class="opp-card"
+            data-category="grant"
+            data-search="education innovation student project grant">
+            <div class="opp-card-top">
+              <div class="opp-icon">🚀</div>
+              <span class="opp-badge">GRANT</span>
+            </div>
+            <h3>Young Innovators Grant</h3>
+            <p class="opp-provider">Example listing · Not verified</p>
+            <p class="opp-description">
+              A demonstration grant for students developing educational
+              or community projects.
+            </p>
+            <div class="opp-details">
+              <div class="opp-detail">💰 <div><strong>Funding</strong><span>Not yet verified</span></div></div>
+              <div class="opp-detail">👥 <div><strong>Eligibility</strong><span>Requirements to be confirmed</span></div></div>
+              <div class="opp-detail">📅 <div><strong>Deadline</strong><span>To be confirmed</span></div></div>
+            </div>
+            <div class="opp-card-actions">
+              <button class="opp-button secondary" data-details="innovators">View details</button>
+            </div>
+          </article>
+
+          <article class="opp-card"
+            data-category="internship"
+            data-search="technology internship student work experience">
+            <div class="opp-card-top">
+              <div class="opp-icon">🧑‍💻</div>
+              <span class="opp-badge">INTERNSHIP</span>
+            </div>
+            <h3>Student Technology Internship</h3>
+            <p class="opp-provider">Example listing · Not verified</p>
+            <p class="opp-description">
+              A demonstration listing for students seeking practical
+              technology experience and mentorship.
+            </p>
+            <div class="opp-details">
+              <div class="opp-detail">🌍 <div><strong>Location</strong><span>To be confirmed</span></div></div>
+              <div class="opp-detail">👥 <div><strong>Eligibility</strong><span>Age and education requirements to be confirmed</span></div></div>
+              <div class="opp-detail">📅 <div><strong>Dates</strong><span>To be confirmed</span></div></div>
+            </div>
+            <div class="opp-card-actions">
+              <button class="opp-button secondary" data-details="internship">View details</button>
+            </div>
+          </article>
+
+          <article class="opp-card"
+            data-category="bootcamp"
+            data-search="free coding bootcamp web development digital skills">
+            <div class="opp-card-top">
+              <div class="opp-icon">📚</div>
+              <span class="opp-badge">BOOTCAMP</span>
+            </div>
+            <h3>Digital Skills Bootcamp</h3>
+            <p class="opp-provider">Example listing · Not verified</p>
+            <p class="opp-description">
+              A demonstration programme for learners interested in
+              digital skills and web development.
+            </p>
+            <div class="opp-details">
+              <div class="opp-detail">🛠️ <div><strong>Skills</strong><span>To be confirmed</span></div></div>
+              <div class="opp-detail">👥 <div><strong>Eligibility</strong><span>Requirements to be confirmed</span></div></div>
+              <div class="opp-detail">📅 <div><strong>Start date</strong><span>To be confirmed</span></div></div>
+            </div>
+            <div class="opp-card-actions">
+              <button class="opp-button secondary" data-details="bootcamp">View details</button>
+            </div>
+          </article>
+
+          <article class="opp-card"
+            data-category="competition"
+            data-search="science mathematics essay writing academic student challenge">
+            <div class="opp-card-top">
+              <div class="opp-icon">🏆</div>
+              <span class="opp-badge">COMPETITION</span>
+            </div>
+            <h3>Academic Excellence Challenge</h3>
+            <p class="opp-provider">Example listing · Not verified</p>
+            <p class="opp-description">
+              A demonstration academic challenge for subjects such as
+              mathematics, science and essay writing.
+            </p>
+            <div class="opp-details">
+              <div class="opp-detail">📖 <div><strong>Subjects</strong><span>To be confirmed</span></div></div>
+              <div class="opp-detail">👥 <div><strong>Eligibility</strong><span>Classes and age limits to be confirmed</span></div></div>
+              <div class="opp-detail">📅 <div><strong>Dates</strong><span>To be confirmed</span></div></div>
+            </div>
+            <div class="opp-card-actions">
+              <button class="opp-button secondary" data-details="academic">View details</button>
+            </div>
+          </article>
+
+        </div>
+
+        <div class="opp-empty" id="oppEmpty">
+          <strong>No matching opportunities found.</strong><br>
+          Try another search or select a different category.
+        </div>
+      </section>
+      <section class="opp-section">
+        <div class="opp-section-heading">
+          <h2>📅 Important Dates</h2>
+          <p>
+            Check opening dates, programme start dates and application
+            deadlines before applying.
+          </p>
+        </div>
+
+        <div class="opp-deadline-panel">
+          <div class="opp-stat">
+            <strong>Opening dates</strong>
+            <span>Find out when applications begin.</span>
+          </div>
+
+          <div class="opp-stat">
+            <strong>Deadlines</strong>
+            <span>Know the final date for applications.</span>
+          </div>
+
+          <div class="opp-stat">
+            <strong>Eligibility</strong>
+            <span>Check age, education and location requirements.</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="opp-section">
+        <div class="opp-section-heading">
+          <h2>✅ Before You Apply</h2>
+          <p>Use this checklist to prepare for an opportunity.</p>
+        </div>
+
+        <div class="opp-notice">
+          <strong>Application checklist</strong>
+          <ul>
+            <li>Confirm that the application is still open.</li>
+            <li>Check the age, country and education requirements.</li>
+            <li>Prepare any required academic records.</li>
+            <li>Check whether a CV, essay or recommendation letter is needed.</li>
+            <li>Apply through the provider's official website.</li>
+            <li>Never pay an unverified person who promises to secure a scholarship.</li>
+          </ul>
+        </div>
+      </section>
+    </div>
+
+    <div
+      class="opp-modal"
+      id="oppModal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="oppModalTitle"
+    >
+      <div class="opp-modal-box">
+        <div class="opp-modal-header">
+          <h2 id="oppModalTitle">Opportunity details</h2>
+
+          <button
+            class="opp-close"
+            id="oppClose"
+            type="button"
+            aria-label="Close details"
+          >×</button>
+        </div>
+
+        <div
+          class="opp-modal-content"
+          id="oppModalContent"
+        ></div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>
+        © <span data-current-year></span>
+        SkillBridge. Learn, grow and connect.
+      </p>
+    </div>
+  </footer>
+
+  <script src="assets/js/app.js"></script>
+
+  <script>
+    (() => {
+      const searchInput = document.getElementById("oppSearch");
+      const searchForm = document.getElementById("oppSearchForm");
+      const filters = document.querySelectorAll(".opp-filter");
+      const cards = [...document.querySelectorAll(".opp-card")];
+      const emptyMessage = document.getElementById("oppEmpty");
+
+      const modal = document.getElementById("oppModal");
+      const modalTitle = document.getElementById("oppModalTitle");
+      const modalContent = document.getElementById("oppModalContent");
+      const closeButton = document.getElementById("oppClose");
+
+      let selectedCategory = "all";
+      let previousFocus = null;
+
+      const examples = {
+        excellence: {
+          title: "Student Excellence Scholarship",
+          category: "Scholarship",
+          eligibility: [
+            "Eligible education levels: to be confirmed.",
+            "Eligible countries: to be confirmed.",
+            "Academic requirements: to be confirmed."
+          ],
+          documents: [
+            "Academic records: to be confirmed.",
+            "Identification requirements: to be confirmed.",
+            "Recommendation letters: to be confirmed."
+          ]
+        },
+
+        coding: {
+          title: "Student Coding Challenge",
+          category: "Competition",
+          eligibility: [
+            "Age range: to be confirmed.",
+            "Eligible countries: to be confirmed.",
+            "Individual or team participation: to be confirmed."
+          ],
+          documents: [
+            "Registration requirements: to be confirmed.",
+            "Project submission format: to be confirmed."
+          ]
+        },
+
+        innovators: {
+          title: "Young Innovators Grant",
+          category: "Grant",
+          eligibility: [
+            "Eligible applicants: to be confirmed.",
+            "Project requirements: to be confirmed.",
+            "Country restrictions: to be confirmed."
+          ],
+          documents: [
+            "Project proposal: to be confirmed.",
+            "Budget and supporting documents: to be confirmed."
+          ]
+        },
+
+        internship: {
+          title: "Student Technology Internship",
+          category: "Internship",
+          eligibility: [
+            "Minimum age: to be confirmed.",
+            "Education requirements: to be confirmed.",
+            "Location and availability: to be confirmed."
+          ],
+          documents: [
+            "CV or résumé: to be confirmed.",
+            "Portfolio or academic records: to be confirmed."
+          ]
+        },
+
+        bootcamp: {
+          title: "Digital Skills Bootcamp",
+          category: "Bootcamp",
+          eligibility: [
+            "Minimum age: to be confirmed.",
+            "Required experience: to be confirmed.",
+            "Location and attendance requirements: to be confirmed."
+          ],
+          documents: [
+            "Registration details: to be confirmed.",
+            "Equipment and internet requirements: to be confirmed."
+          ]
+        },
+
+        academic: {
+          title: "Academic Excellence Challenge",
+          category: "Competition",
+          eligibility: [
+            "Eligible school classes: to be confirmed.",
+            "Age limits: to be confirmed.",
+            "Participating subjects: to be confirmed."
+          ],
+          documents: [
+            "Registration requirements: to be confirmed.",
+            "Competition format: to be confirmed."
+          ]
+        }
+      };
+
+      // Search and category filters
+      function filterCards() {
+        const query = searchInput.value.trim().toLowerCase();
+        let visibleCount = 0;
+
+        cards.forEach(card => {
+          const category = card.dataset.category;
+          const searchableText =
+            (card.innerText + " " + card.dataset.search).toLowerCase();
+
+          const matchesCategory =
+            selectedCategory === "all" ||
+            category === selectedCategory;
+
+          const matchesSearch = searchableText.includes(query);
+          const visible = matchesCategory && matchesSearch;
+
+          card.hidden = !visible;
+
+          if (visible) {
+            visibleCount++;
+          }
+        });
+
+        emptyMessage.style.display =
+          visibleCount > 0 ? "none" : "block";
+      }
+
+      searchForm.addEventListener("submit", event => {
+        event.preventDefault();
+        filterCards();
+
+        document.getElementById("oppGrid").scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      });
+
+      searchInput.addEventListener("input", filterCards);
+
+      filters.forEach(button => {
+        button.addEventListener("click", () => {
+          selectedCategory = button.dataset.category;
+
+          filters.forEach(filter => {
+            const active = filter === button;
+
+            filter.classList.toggle("active", active);
+            filter.setAttribute("aria-pressed", String(active));
+          });
+
+          filterCards();
+        });
+
+        button.setAttribute(
+          "aria-pressed",
+          String(button.classList.contains("active"))
+        );
+      });
+
+      // Open opportunity details
+      document.querySelectorAll("[data-details]").forEach(button => {
+        button.addEventListener("click", () => {
+          const item = examples[button.dataset.details];
+
+          if (!item) return;
+
+          previousFocus = button;
+          modalTitle.textContent = item.title;
+
+          const eligibilityItems = item.eligibility
+            .map(text => `<li>${text}</li>`)
+            .join("");
+
+          const documentItems = item.documents
+            .map(text => `<li>${text}</li>`)
+            .join("");
+
+          modalContent.innerHTML = `
+            <p><strong>Category:</strong> ${item.category}</p>
+
+            <p>
+              <strong>Status:</strong>
+              Demonstration example — not verified.
+            </p>
+
+            <p>
+              <strong>Application opening date:</strong>
+              To be confirmed.
+            </p>
+
+            <p>
+              <strong>Application deadline:</strong>
+              To be confirmed.
+            </p>
+
+            <p>
+              <strong>Programme start date:</strong>
+              To be confirmed.
+            </p>
+
+            <h3>Eligibility requirements</h3>
+            <ul>${eligibilityItems}</ul>
+
+            <h3>Required documents</h3>
+            <ul>${documentItems}</ul>
+
+            <h3>Application link</h3>
+            <p>
+              An official provider and application link have not yet
+              been verified. No application is available through
+              this demonstration listing.
+            </p>
+          `;
+
+          modal.classList.add("open");
+          document.body.style.overflow = "hidden";
+          closeButton.focus();
+        });
+      });
+
+      // Close the details popup
+      function closeModal() {
+        modal.classList.remove("open");
+        document.body.style.overflow = "";
+
+        if (previousFocus) {
+          previousFocus.focus();
+        }
+      }
+
+      closeButton.addEventListener("click", closeModal);
+
+      modal.addEventListener("click", event => {
+        if (event.target === modal) {
+          closeModal();
+        }
+      });
+
+      document.addEventListener("keydown", event => {
+        if (
+          event.key === "Escape" &&
+          modal.classList.contains("open")
+        ) {
+          closeModal();
+        }
+      });
+
+      filterCards();
+    })();
+  </script>
+</body>
+</html>
