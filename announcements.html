@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="theme-color" content="#10172a">
+  <meta name="description" content="Stay updated with SkillBridge educational announcements, scholarships, competitions, events and important deadlines.">
+
+  <title>Announcements | SkillBridge</title>
+
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <style>
+    .announcements-page {
+      max-width: 1200px;
+      margin: auto;
+      padding: 32px 20px 60px;
+    }
+
+    .announcements-hero {
+      padding: 42px 28px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, #151f3d, #3730a3, #2563eb);
+      color: white;
+      margin-bottom: 30px;
+    }
+
+    .announcements-hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin: 12px 0;
+    }
+
+    .announcements-hero p {
+      max-width: 650px;
+      line-height: 1.8;
+      color: #e0e7ff;
+    }
+
+    .announcement-label {
+      display: inline-block;
+      padding: 7px 12px;
+      border-radius: 30px;
+      background: rgba(255,255,255,.13);
+      font-size: .8rem;
+      font-weight: 700;
+    }
+
+    .announcement-search {
+      width: 100%;
+      padding: 15px 17px;
+      border: 1px solid #dbe1ec;
+      border-radius: 12px;
+      font-size: 1rem;
+      margin: 12px 0 20px;
+      box-sizing: border-box;
+      background: white;
+      color: #172033;
+    }
+
+    .announcement-filters {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 25px;
+    }
+
+    .announcement-filter {
+      border: 1px solid #dbe1ec;
+      background: white;
+      color: #27324a;
+      padding: 10px 15px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: .9rem;
+    }
+
+    .announcement-filter.active {
+      background: #3730a3;
+      color: white;
+      border-color: #3730a3;
+    }
+
+    .announcement-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .announcement-card {
+      background: white;
+      border: 1px solid #e4e8f0;
+      border-radius: 17px;
+      padding: 22px;
+      box-shadow: 0 5px 20px rgba(20,30,60,.04);
+    }
+
+    .announcement-card-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .announcement-category {
+      color: #4338ca;
+      background: #eef2ff;
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-size: .78rem;
+      font-weight: 700;
+    }
+
+    .announcement-date {
+      font-size: .8rem;
+      color: #68738a;
+    }
+
+    .announcement-card h2 {
+      font-size: 1.2rem;
+      line-height: 1.5;
+      color: #172033;
+      margin: 10px 0;
+    }
+
+    .announcement-card p {
+      color: #657087;
+      line-height: 1.75;
+      font-size: .95rem;
+    }
+
+    .announcement-card-footer {
+      border-top: 1px solid #edf0f5;
+      padding-top: 15px;
+      margin-top: 18px;
+      color: #68738a;
+      font-size: .85rem;
+    }
+
+    .announcement-notice {
+      margin-top: 30px;
+      padding: 18px;
+      border-radius: 12px;
+      background: #f1f5ff;
+      color: #34446b;
+      line-height: 1.7;
+      font-size: .9rem;
+    }
+
+    .announcement-empty {
+      display: none;
+      text-align: center;
+      padding: 35px 15px;
+      color: #68738a;
+    }
+
+    @media (max-width: 700px) {
+      .announcement-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .announcements-page {
+        padding: 22px 15px 45px;
+      }
+
+      .announcements-hero {
+        padding: 30px 21px;
+      }
+
+      .announcement-card {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="logo">SkillBridge</a>
+
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        type="button"
+        aria-label="Toggle navigation"
+        aria-expanded="false"
+      >
+        ☰
+      </button>
+
+      <nav class="navigation" id="navigation">
+        <a href="index.html">Home</a>
+        <a href="discover.html">Discover</a>
+        <a href="academy.html">Academy</a>
+        <a href="projects.html">Project Lab</a>
+        <a href="careers.html">Careers</a>
+        <a href="opportunities.html">Opportunities</a>
+        <a href="announcements.html" aria-current="page">Announcements</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="profile.html">Profile</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="announcements-page">
+
+    <section class="announcements-hero">
+      <span class="announcement-label">SKILLBRIDGE COMMUNITY</span>
+
+      <h1>Stay informed. Stay ahead.</h1>
+
+      <p>
+        Discover educational updates, upcoming events, scholarship
+        announcements and student opportunities — all in one place.
+      </p>
+    </section>
+
+    <section aria-label="Find announcements">
+      <h2>Latest Announcements</h2>
+
+      <p>
+        Explore updates that can help you learn, grow and take your next step.
+      </p>
+
+      <input
+        type="search"
+        id="announcementSearch"
+        class="announcement-search"
+        placeholder="Search announcements..."
+        aria-label="Search announcements"
+      >
+
+      <div class="announcement-filters" aria-label="Filter announcements">
+        <button class="announcement-filter active" data-category="all" type="button">
+          All Updates
+        </button>
+
+        <button class="announcement-filter" data-category="education" type="button">
+          Education
+        </button>
+
+        <button class="announcement-filter" data-category="scholarship" type="button">
+          Scholarships
+        </button>
+
+        <button class="announcement-filter" data-category="competition" type="button">
+          Competitions
+        </button>
+
+        <button class="announcement-filter" data-category="events" type="button">
+          Events
+        </button>
+      </div>
+    </section>
+
+    <section class="announcement-grid" id="announcementGrid">
+
+      <!-- PART 2 CONTINUES HERE -->
+      <!-- Education announcement -->
+      <article class="announcement-card" data-category="education">
+        <div class="announcement-card-top">
+          <span class="announcement-category">Education</span>
+          <span class="announcement-date">General update</span>
+        </div>
+
+        <h2>Keep building your skills</h2>
+
+        <p>
+          Explore learning resources, practise new skills and work on
+          projects that demonstrate what you can do.
+        </p>
+
+        <div class="announcement-card-footer">
+          📚 Learning &amp; personal development
+        </div>
+      </article>
+
+      <!-- Scholarship announcement -->
+      <article class="announcement-card" data-category="scholarship">
+        <div class="announcement-card-top">
+          <span class="announcement-category">Scholarships</span>
+          <span class="announcement-date">Opportunity reminder</span>
+        </div>
+
+        <h2>Prepare for scholarship applications</h2>
+
+        <p>
+          Keep your academic records and required documents organised.
+          Always confirm eligibility, deadlines and application details
+          through the scholarship provider's official website.
+        </p>
+
+        <div class="announcement-card-footer">
+          🎓 Research opportunities carefully
+        </div>
+      </article>
+
+      <!-- Competition announcement -->
+      <article class="announcement-card" data-category="competition">
+        <div class="announcement-card-top">
+          <span class="announcement-category">Competitions</span>
+          <span class="announcement-date">Student reminder</span>
+        </div>
+
+        <h2>Turn your ideas into projects</h2>
+
+        <p>
+          Student competitions can help you practise problem-solving,
+          teamwork and presentation skills. Read the official rules
+          before submitting a project.
+        </p>
+
+        <div class="announcement-card-footer">
+          🏆 Innovation &amp; creativity
+        </div>
+      </article>
+
+      <!-- Events announcement -->
+      <article class="announcement-card" data-category="events">
+        <div class="announcement-card-top">
+          <span class="announcement-category">Events</span>
+          <span class="announcement-date">Planning reminder</span>
+        </div>
+
+        <h2>Make time for learning events</h2>
+
+        <p>
+          Look out for educational workshops, webinars and bootcamps.
+          Record the dates and check the organiser's official
+          announcement for joining instructions.
+        </p>
+
+        <div class="announcement-card-footer">
+          📅 Workshops &amp; webinars
+        </div>
+      </article>
+
+    </section>
+
+    <div class="announcement-empty" id="announcementEmpty">
+      <h3>No announcements found</h3>
+      <p>Try a different search term or select another category.</p>
+    </div>
+
+    <aside class="announcement-notice">
+      <strong>Important:</strong> These are demonstration announcements
+      for the SkillBridge prototype, not verified live opportunities.
+      Always confirm dates, eligibility and application information
+      with the relevant official organiser.
+    </aside>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-container">
+      <p>&copy; 2026 SkillBridge. Learning opens new possibilities.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/app.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const searchInput = document.getElementById("announcementSearch");
+      const filterButtons = document.querySelectorAll(".announcement-filter");
+      const cards = document.querySelectorAll(".announcement-card");
+      const emptyMessage = document.getElementById("announcementEmpty");
+
+      let activeCategory = "all";
+
+      function filterAnnouncements() {
+        const searchTerm = searchInput.value.trim().toLowerCase();
+        let visibleCount = 0;
+
+        cards.forEach(function (card) {
+          const category = card.dataset.category;
+          const text = card.textContent.toLowerCase();
+
+          const matchesCategory =
+            activeCategory === "all" || category === activeCategory;
+
+          const matchesSearch = text.includes(searchTerm);
+          const shouldShow = matchesCategory && matchesSearch;
+
+          card.style.display = shouldShow ? "" : "none";
+
+          if (shouldShow) {
+            visibleCount++;
+          }
+        });
+
+        emptyMessage.style.display = visibleCount === 0 ? "block" : "none";
+      }
+
+      searchInput.addEventListener("input", filterAnnouncements);
+
+      filterButtons.forEach(function (button) {
+        button.addEventListener("click", function () {
+          activeCategory = button.dataset.category;
+
+          filterButtons.forEach(function (item) {
+            item.classList.remove("active");
+          });
+
+          button.classList.add("active");
+          filterAnnouncements();
+        });
+      });
+
+      // Mobile navigation toggle
+      const menuToggle = document.getElementById("menuToggle");
+      const navigation = document.getElementById("navigation");
+
+      if (menuToggle && navigation) {
+        menuToggle.addEventListener("click", function () {
+          const isOpen = navigation.classList.toggle("active");
+          menuToggle.setAttribute("aria-expanded", String(isOpen));
+        });
+      }
+
+      filterAnnouncements();
+    });
+  </script>
+
+</body>
+</html>
